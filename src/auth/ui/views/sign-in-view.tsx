@@ -87,15 +87,15 @@ export const SignInView = () => {
                                         control={form.control}
                                         name="email"
                                         render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Email</FormLabel>
-                                                <FormControl>
+                                    <FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
                                                     <Input
-                                                        type="email"
-                                                        placeholder="m@example.com"
-                                                        {...field}
-                                                    />
-                                                </FormControl>
+                                                type="email"
+                                                placeholder="m@example.com"
+                                                {...field}
+                                            />
+                                        </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
@@ -114,7 +114,7 @@ export const SignInView = () => {
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
-                                            </FormItem>
+                                    </FormItem>
                                         )}
                                     />
                                 </div>
@@ -172,7 +172,7 @@ export const SignInView = () => {
                         </form>
                     </Form>
 
-                    <div className="bg-[#16A34A] relative hidden md:flex flex-col gap-y-4 items-center justify-center rounded-r-none min-h-[500px] w-full">
+                    <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex flex-col gap-y-4 items-center justify-center rounded-r-none min-h-[500px] w-full">
                         <img
                             src="/logo.svg"
                             alt="Image"

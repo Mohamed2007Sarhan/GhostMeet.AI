@@ -15,7 +15,7 @@ export const HomeView = () => {
   return (
     <div className="flex flex-col p-4 gap-y-4">
       <p>Logged in as {session.user.name}</p>
-      <button onClick={() => authClient.signOut()}>Sign Out</button>
+      <button onClick={() => authClient.signOut()} className="bg-primary text-white px-4 py-2 rounded">Sign Out</button>
     </div>
   );
 };

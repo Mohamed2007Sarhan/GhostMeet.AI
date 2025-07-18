@@ -214,7 +214,7 @@ export const SignUpView = () => {
           </Form>
 
           {/* 👉 Right Section (visual branding) */}
-          <div className="bg-[#16A34A] relative hidden md:flex flex-col gap-y-4 items-center justify-center rounded-r-none min-h-[500px] w-full">
+          <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex flex-col gap-y-4 items-center justify-center rounded-r-none min-h-[500px] w-full">
             <img
               src="/logo.svg"
               alt="GhostMeet.AI Logo"
