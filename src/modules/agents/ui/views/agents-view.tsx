@@ -5,6 +5,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTRPC } from "@/trpc/client";
 import { LoadingState } from "@/components/loadung-state"; // تصحيح الاسم
 import { Errorstate } from "@/components/error-state"; // تصحيح الاسم
+import { ResponsiveDialog } from "@/components/responsive-dialog";
 
 const AgentsInner = () => {
   const trpc = useTRPC();
@@ -12,6 +13,7 @@ const AgentsInner = () => {
 
   return (
     <div>
+      
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
