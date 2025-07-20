@@ -38,7 +38,16 @@ export const AgentForm = ({
 
     const createAgent = useMutation(
         trpc.agents.create.mutationOptions({
-            onSuccess: () => {},
+            onSuccess: async () => {
+                await queryClient.invalidateQueries(
+                    trpc.agents.getMany.queryOptions(),
+                );
+                if (initialValues?.id) {
+                    await queryClient.invalidateQueries(
+                        trpc.agents.getOne.queryOptions({ id: initialValues.id })
+                    )
+                }
+            },
             onError: () => {},
         }),
     );
@@ -76,6 +85,7 @@ export const AgentForm = ({
                         <FormControl>
                             <Input {...field} placeholder="e.g. john "/>
                         </FormControl>
+                        <FormMessage/>
                     </FormItem>
                 )}
                 />
@@ -88,12 +98,23 @@ export const AgentForm = ({
                         <FormControl>
                             <Textarea {...field} placeholder="You are a help ful math assistant that can answer questions and help with assignments."/>
                         </FormControl>
+                        <FormMessage/>
                     </FormItem>
                 )}
                 />
 
-                <div>
-                    {onCancel}
+                <div className="flex justify-between gap-x-2">
+                    {onCancel && (
+                        <Button
+                        variant="ghost"
+                        disabled={isPending}
+                        type="button"
+                        onClick={() => onCancel()}
+                        >
+                            Cancel
+                        </Button>
+                    )}
+                    <Button disabled={isPending} type="submit">{isEdit ? "Update" : "Create"}</Button>
                 </div>
             </form>
         </Form>
