@@ -11,7 +11,7 @@ export const { TRPCProvider, useTRPC } = createTRPCContext<AppRouter>();
 let browserQueryClient: QueryClient;
 function getQueryClient() {
   if (typeof window === 'undefined') {
-    // Server: always make a new query client
+    // Server: always make a new query clieznt
     return makeQueryClient();
   }
   // Browser: make a new query client if we don't already have one
