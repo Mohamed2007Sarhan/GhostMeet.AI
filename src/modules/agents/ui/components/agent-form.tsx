@@ -1,6 +1,6 @@
 import { useTRPC } from "@/trpc/client";
 import { AgentGetOne } from "../../types";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -18,6 +18,7 @@ import { GeneratedAvatar } from "@/components/generated-avater";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 
 
@@ -33,7 +34,7 @@ export const AgentForm = ({
     initialValues,
 }: AgentFormProps) => {
     const trpc = useTRPC();
-    const router = useRouter();
+    // const router = useRouter();
     const queryClient = useQueryClient();
 
     const createAgent = useMutation(
@@ -45,10 +46,13 @@ export const AgentForm = ({
                 if (initialValues?.id) {
                     await queryClient.invalidateQueries(
                         trpc.agents.getOne.queryOptions({ id: initialValues.id })
-                    )
+                    );
                 }
+                onSuccess?.();
             },
-            onError: () => {},
+            onError: (error) => {
+                toast.error(error.message);
+            },
         }),
     );
     const form = useForm<z.infer<typeof agentsInsertSchema>>({
@@ -90,13 +94,13 @@ export const AgentForm = ({
                 )}
                 />
                 <FormField
-                name="instructuins"
+                name="instructions"
                 control={form.control}
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Instructuins</FormLabel>
+                        <FormLabel>Instructions</FormLabel>
                         <FormControl>
-                            <Textarea {...field} placeholder="You are a help ful math assistant that can answer questions and help with assignments."/>
+                            <Textarea {...field} placeholder="You are a helpful math assistant that can answer questions and help with assignments."/>
                         </FormControl>
                         <FormMessage/>
                     </FormItem>
